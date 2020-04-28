@@ -1,0 +1,48 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Bangers&display=swap');
+
+* {
+    box-sizing: border-box; 
+    background-color: pink;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Amatic SC', cursive;
+}
+
+#title {
+    font-family: 'Bangers', cursive;
+    text-align: center;
+    font-size: 3rem;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#start-game-btn {
+    position: fixed;
+    top: 20%;
+    animation: fade-in 3s ease-out none;
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+    padding: 0.7rem;
+    border: 2px solid #424242;
+    border-radius: 13%;
+    font-size: 2rem;
+    text-align: center;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
