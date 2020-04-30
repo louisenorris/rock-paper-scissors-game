@@ -11,8 +11,13 @@
 <body>
   <h1 id="title">Rock, Paper, Scissors</h1>
   <div class="container">
-    <p>It's Rock, Paper, Scissors, best out of three, simple as. No scores are recorded, because let's face it - it's just a game of Rock, Paper, Scissors. Fun all the same though! Start game to unleash pure joy.</p>
-    <button id="start-game-btn">Start Game!</button>
+    <p>It's Rock, Paper, Scissors, best out of three, simple as.</p>
+    <p>Select rock, paper or scissors below to play the game and unleash pure joy.</p>
+    <div class="choice-btn-container">
+      <button value="rock" id="rock-btn">Rock</button>
+      <button value="paper" id="paper-btn">Paper</button>
+      <button value="scissors" id="scissors-btn">Scissors</button>
+    </div>
     <div class="img-container">
       <div id="left-hand">
         <img src="assets/left_start.png" alt="left-hand">
@@ -20,6 +25,9 @@
       <div id="right-hand">
         <img src="assets/right_start.png" alt="right-hand">
       </div>
+    </div>
+    <div class="score-container">
+      <h3>Score: computer 0 player 0</h3>
     </div>
   </div>
 </body>

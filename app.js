@@ -1,66 +1,97 @@
 const startGameBtn = document.getElementById('start-game-btn');
-const rightHand = document.querySelector('#right-hand img');
-const leftHand = document.querySelector('#left-hand img');
+const rockSelectionBtn = document.getElementById('rock-btn');
+const paperSelectionBtn = document.getElementById('paper-btn');
+const scissorsSelectionBtn = document.getElementById('scissors-btn');
+const selectionBtns = document.querySelectorAll('.choice-btn-container button')
+const rightHand = document.querySelector('#right-hand img'); //player
+const leftHand = document.querySelector('#left-hand img'); //computer
+const scoreContainer = document.querySelector('.score-container');
+const scoreContainerText = document.querySelector('.score-container h3');
 
-const ROCK = 'ROCK';
-const PAPER = 'PAPER';
-const SCISSORS = 'SCISSORS';
-const DEFAULT_USER_CHOICE = ROCK;
 const RESULT_DRAW = 'DRAW';
 const RESULT_PLAYER_WINS = 'PLAYER_WINS';
 const RESULT_COMPUTER_WINS = 'COMPUTER_WINS';
 
 let gameIsRunning = false;
+let playerChoice;
+let playerScore = 0;
+let computerScore = 0;
+let currentRound = 0;
+
+// const gameOver = () => {
+//     alert('game over')
+// }
 
 const getPlayerChoice = () => {
-    const selection = prompt(`${ROCK}, ${PAPER} or ${SCISSORS}?`, '').toUpperCase();
-    if (
-        selection !== ROCK &&
-        selection !== PAPER &&
-        selection !== SCISSORS
-    ) {
-        alert(`Invalid choice! We chose ${DEFAULT_USER_CHOICE} for you!`);
-        return;
-    }
-    return selection;
-};
+    console.log(event.target.value, 'chosen');
+    rightHand.classList.add('animate');
+    leftHand.classList.add('animate');
+    // event.target.style.backgroundColor = 'rgb(160, 144, 196)';
+    playerChoice = event.target.value;
+    playRound(playerChoice);
+}
+
+rockSelectionBtn.addEventListener('click', getPlayerChoice);
+paperSelectionBtn.addEventListener('click', getPlayerChoice);
+scissorsSelectionBtn.addEventListener('click', getPlayerChoice);
+
 
 const getComputerChoice = () => {
     const randomValue = Math.random();
     if (randomValue < 0.34) {
-        return ROCK;
+        return 'rock';
     } else if (randomValue < 0.67) {
-        return PAPER;
+        return 'paper';
     } else {
-        return SCISSORS;
+        return 'scissors';
     }
 };
 
-const startShake = () => {
-    rightHand.classList.add('animate');
-    leftHand.classList.add('animate');
+// const startShake = () => {
+//     debugger
+//     rightHand.classList.add('animate');
+//     leftHand.classList.add('animate');
+//     debugger
+// }
+
+const changeHandImgs = () => {
+
 }
 
-const getWinner = (cChoice, pChoice = DEFAULT_USER_CHOICE) =>
+const getWinner = (cChoice, pChoice) =>
     cChoice === pChoice 
     ? RESULT_DRAW 
-    :  cChoice === ROCK && pChoice === PAPER ||
-    cChoice === PAPER && pChoice === SCISSORS ||
-    cChoice === SCISSORS && pChoice === ROCK 
+    :  cChoice === 'rock' && pChoice === 'paper' ||
+    cChoice === 'paper' && pChoice === 'scissors' ||
+    cChoice === 'scissors' && pChoice === 'rock' 
     ? RESULT_PLAYER_WINS 
     : RESULT_COMPUTER_WINS;
 
-startGameBtn.addEventListener('click', () => {
+
+const nextRound = () => {
+    gameIsRunning = false;
+    // for (btn of selectionBtns) {
+    //     btn.style.backgroundColor = 'white';
+    // }
+    rightHand.classList.remove('animate');
+    leftHand.classList.remove('animate');
+}
+
+const playRound = (playerChoice) => {
     if (gameIsRunning) {
         return;
     }
     gameIsRunning = true;
     console.log('Game is starting...');
-    startShake();
-    const playerChoice = getPlayerChoice(); 
+    // debugger
+    // rightHand.classList.add('animate');
+    // leftHand.classList.add('animate');
     const computerChoice = getComputerChoice();
     let winner;
     if (playerChoice) {
+        console.log(computerChoice, playerChoice);
+        rightHand.src = `assets/right_${playerChoice}.png`;
+        leftHand.src = `assets/left_${computerChoice}.png`;
         winner = getWinner(computerChoice, playerChoice);
     } else {
         winner = getWinner(computerChoice);
@@ -70,42 +101,23 @@ startGameBtn.addEventListener('click', () => {
         message = message + 'had a draw.';
     } else if (winner === RESULT_PLAYER_WINS) {
         message = message + 'won!';
+        playerScore++;
     } else {
         message = message + 'lost.';
+        computerScore++;
     }
-    alert(message);
+    currentRound++;
+    console.log(message, 'round ' + currentRound);
+    // console.log(`Player score: ${playerScore}. Computer score: ${computerScore}.`)
     gameIsRunning = false;
-});
-
-//not related to the game
-
-// const combine = (resultHandler, operation, ...numbers) => {
-//     const validateNumber = (number) => {
-//         return isNaN(number) ? 0 : number;
-//     }
-//     let sum = 0;
-//     for (const num of numbers) {
-//         if (operation === 'ADD') {
-//             sum += validateNumber(num);
-//         } else {
-//             sum -= validateNumber(num);
-//         }
-//     }
-//     resultHandler(sum);
-// }
-
-// const subtractUp = function(resultHandler, ...numbers) {
-//     let sum = 0;
-//     for (const num of numbers) {
-//         sum -= num;
-//     }
-//     resultHandler(sum);
-// };
-
-// const showResult = (messageText, result) => {
-//     alert(messageText + ' ' + result);
-// }
-
-// combine(showResult.bind(this, 'The result after adding all numbers is:'), 'ADD', 5, 10, -3, 6, 10);
-// combine(showResult.bind(this, 'The result after adding all numbers is:'), 'ADD', 5, 10, -3, 6, 10, 25, 88);
-// combine(showResult.bind(this, 'The result after subtracting all numbers is:'), 'SUBTRACT', 1, 10, 15, 20);
+    scoreContainer.innerText = `Score: computer ${computerScore} player ${playerScore}`
+    if (currentRound >= 3) {
+        let result;
+        computerScore === playerScore ? result = scoreContainer.innerText = `Game Over - it's a draw.`:
+        computerScore > playerScore ? result = scoreContainer.innerText = `Game Over - Computer wins!` :
+        result = scoreContainer.innerText = `Game Over - You win!`
+        scoreContainer.append(result);
+    } else {
+        nextRound();
+    }
+};

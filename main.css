@@ -28,7 +28,7 @@ body {
     width: 100%;
 }
 
-#start-game-btn {
+/* #start-game-btn {
     position: fixed;
     top: 30%;
     animation: fade-in 3s ease-out none;
@@ -39,6 +39,29 @@ body {
     border-radius: 13%;
     font-size: 2rem;
     text-align: center;
+} */
+
+.choice-btn-container{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    top: 40%;
+}
+
+.choice-btn-container button {
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+    border: 2px solid #424242;
+    border-radius: 13%;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem;
+    width: 5rem;
+}
+
+.choice-btn-container button:focus {
+    outline: none;
 }
 
 .img-container {
@@ -67,6 +90,11 @@ body {
 
 .animate {
     animation: 0.25s shake 0.2s 3 forwards;
+}
+
+.score-container {
+    position: absolute;
+    top: 80%;
 }
 
 @keyframes shake {
