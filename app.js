@@ -1,4 +1,6 @@
 const startGameBtn = document.getElementById('start-game-btn');
+const rightHand = document.querySelector('#right-hand img');
+const leftHand = document.querySelector('#left-hand img');
 
 const ROCK = 'ROCK';
 const PAPER = 'PAPER';
@@ -34,6 +36,11 @@ const getComputerChoice = () => {
     }
 };
 
+const startShake = () => {
+    rightHand.classList.add('animate');
+    leftHand.classList.add('animate');
+}
+
 const getWinner = (cChoice, pChoice = DEFAULT_USER_CHOICE) =>
     cChoice === pChoice 
     ? RESULT_DRAW 
@@ -49,6 +56,7 @@ startGameBtn.addEventListener('click', () => {
     }
     gameIsRunning = true;
     console.log('Game is starting...');
+    startShake();
     const playerChoice = getPlayerChoice(); 
     const computerChoice = getComputerChoice();
     let winner;

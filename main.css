@@ -23,7 +23,8 @@ body {
 }
 .container {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -38,6 +39,46 @@ body {
     border-radius: 13%;
     font-size: 2rem;
     text-align: center;
+}
+
+.img-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    top: 50%;
+}
+
+#left-hand {
+    height: 300px;
+}
+
+#left-hand img {
+    height: 100%;
+}
+
+#right-hand {
+    height: 300px;
+}
+
+#right-hand img {
+    height: 100%;
+}
+
+.animate {
+    animation: 0.25s shake 0.2s 3 forwards;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(1.5rem);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @keyframes fade-in {
