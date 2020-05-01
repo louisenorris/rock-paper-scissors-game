@@ -32,19 +32,6 @@ body {
     margin: 0.5rem;
 }
 
-/* #start-game-btn {
-    position: fixed;
-    top: 30%;
-    animation: fade-in 3s ease-out none;
-    background-color: white;
-    font-family: 'Amatic SC', cursive;
-    padding: 0.7rem;
-    border: 2px solid #424242;
-    border-radius: 13%;
-    font-size: 2rem;
-    text-align: center;
-} */
-
 .choice-btn-container{
     position: absolute;
     display: flex;
@@ -98,7 +85,11 @@ body {
 
 .score-container {
     position: absolute;
-    top: 80%;
+    top: 60%;
+}
+
+.score-container h1 {
+    padding: 0;
 }
 
 @keyframes shake {

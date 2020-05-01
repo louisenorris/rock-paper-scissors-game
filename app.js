@@ -5,6 +5,7 @@ const scissorsSelectionBtn = document.getElementById('scissors-btn');
 const selectionBtns = document.querySelectorAll('.choice-btn-container button')
 let rightHand = document.querySelector('#right-hand img'); //player
 let leftHand = document.querySelector('#left-hand img'); //computer
+const currentRoundText = document.querySelector('.score-container h1');
 const scoreText = document.querySelector('.score-container h2:first-of-type');
 const resultText = document.querySelector('.score-container h2:last-of-type');
 
@@ -16,13 +17,14 @@ let gameIsRunning = false;
 let playerChoice;
 let playerScore = 0;
 let computerScore = 0;
-let currentRound = 0;
+let currentRound = 1;
 
 // const gameOver = () => {
 //     alert('game over')
 // }
 
 const getPlayerChoice = () => {
+    currentRoundText.innerText = `Round ${currentRound}`
     console.log(event.target.value, 'chosen');
     rightHand.classList.add('animate');
     leftHand.classList.add('animate');
@@ -78,7 +80,6 @@ function waitForAnimation() {
         message = message + 'lost.';
         computerScore++;
     }
-    currentRound++;
     console.log(message, 'round ' + currentRound);
     gameIsRunning = false;
     scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`
@@ -87,18 +88,17 @@ function waitForAnimation() {
         computerScore > playerScore ? resultText.innerText = `Game Over - Computer wins!` :
         resultText.innerText = `Game Over - You win!`;
     } else {
+        currentRound++;
         nextRound();
     }
 }
 
 const startShake = () => {
-    // debugger
     rightHand.src = `assets/right_start.png`;
     leftHand.src = `assets/left_start.png`;
     rightHand.classList.add('animate');
     leftHand.classList.add('animate');
     setTimeout(waitForAnimation, 1000);
-    // debugger
 }
 
 const getWinner = (cChoice, pChoice) =>
