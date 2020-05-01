@@ -3,10 +3,10 @@ const rockSelectionBtn = document.getElementById('rock-btn');
 const paperSelectionBtn = document.getElementById('paper-btn');
 const scissorsSelectionBtn = document.getElementById('scissors-btn');
 const selectionBtns = document.querySelectorAll('.choice-btn-container button')
-const rightHand = document.querySelector('#right-hand img'); //player
-const leftHand = document.querySelector('#left-hand img'); //computer
-const scoreContainer = document.querySelector('.score-container');
-const scoreContainerText = document.querySelector('.score-container h3');
+let rightHand = document.querySelector('#right-hand img'); //player
+let leftHand = document.querySelector('#left-hand img'); //computer
+const scoreText = document.querySelector('.score-container h2:first-of-type');
+const resultText = document.querySelector('.score-container h2:last-of-type');
 
 const RESULT_DRAW = 'DRAW';
 const RESULT_PLAYER_WINS = 'PLAYER_WINS';
@@ -28,7 +28,7 @@ const getPlayerChoice = () => {
     leftHand.classList.add('animate');
     // event.target.style.backgroundColor = 'rgb(160, 144, 196)';
     playerChoice = event.target.value;
-    playRound(playerChoice);
+    playRound();
 }
 
 rockSelectionBtn.addEventListener('click', getPlayerChoice);
@@ -47,29 +47,8 @@ const getComputerChoice = () => {
     }
 };
 
-// const startShake = () => {
-//     debugger
-//     rightHand.classList.add('animate');
-//     leftHand.classList.add('animate');
-//     debugger
-// }
-
-const changeHandImgs = () => {
-
-}
-
-const getWinner = (cChoice, pChoice) =>
-    cChoice === pChoice 
-    ? RESULT_DRAW 
-    :  cChoice === 'rock' && pChoice === 'paper' ||
-    cChoice === 'paper' && pChoice === 'scissors' ||
-    cChoice === 'scissors' && pChoice === 'rock' 
-    ? RESULT_PLAYER_WINS 
-    : RESULT_COMPUTER_WINS;
-
-
 const nextRound = () => {
-    gameIsRunning = false;
+    // gameIsRunning = false;
     // for (btn of selectionBtns) {
     //     btn.style.backgroundColor = 'white';
     // }
@@ -77,15 +56,8 @@ const nextRound = () => {
     leftHand.classList.remove('animate');
 }
 
-const playRound = (playerChoice) => {
-    if (gameIsRunning) {
-        return;
-    }
-    gameIsRunning = true;
-    console.log('Game is starting...');
-    // debugger
-    // rightHand.classList.add('animate');
-    // leftHand.classList.add('animate');
+function waitForAnimation() {
+    console.log('waiting for shake')
     const computerChoice = getComputerChoice();
     let winner;
     if (playerChoice) {
@@ -108,16 +80,42 @@ const playRound = (playerChoice) => {
     }
     currentRound++;
     console.log(message, 'round ' + currentRound);
-    // console.log(`Player score: ${playerScore}. Computer score: ${computerScore}.`)
     gameIsRunning = false;
-    scoreContainer.innerText = `Score: computer ${computerScore} player ${playerScore}`
+    scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`
     if (currentRound >= 3) {
-        let result;
-        computerScore === playerScore ? result = scoreContainer.innerText = `Game Over - it's a draw.`:
-        computerScore > playerScore ? result = scoreContainer.innerText = `Game Over - Computer wins!` :
-        result = scoreContainer.innerText = `Game Over - You win!`
-        scoreContainer.append(result);
+        computerScore === playerScore ? resultText.innerText = `Game Over - it's a draw.`:
+        computerScore > playerScore ? resultText.innerText = `Game Over - Computer wins!` :
+        resultText.innerText = `Game Over - You win!`;
     } else {
         nextRound();
     }
+}
+
+const startShake = () => {
+    // debugger
+    rightHand.src = `assets/right_start.png`;
+    leftHand.src = `assets/left_start.png`;
+    rightHand.classList.add('animate');
+    leftHand.classList.add('animate');
+    setTimeout(waitForAnimation, 1000);
+    // debugger
+}
+
+const getWinner = (cChoice, pChoice) =>
+    cChoice === pChoice 
+    ? RESULT_DRAW 
+    :  cChoice === 'rock' && pChoice === 'paper' ||
+    cChoice === 'paper' && pChoice === 'scissors' ||
+    cChoice === 'scissors' && pChoice === 'rock' 
+    ? RESULT_PLAYER_WINS 
+    : RESULT_COMPUTER_WINS;
+
+
+const playRound = () => {
+    if (gameIsRunning || currentRound > 3) {
+        return;
+    }
+    gameIsRunning = true;
+    console.log('Game is starting...');
+    startShake();
 };

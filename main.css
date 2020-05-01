@@ -28,6 +28,10 @@ body {
     width: 100%;
 }
 
+.container p {
+    margin: 0.5rem;
+}
+
 /* #start-game-btn {
     position: fixed;
     top: 30%;
@@ -46,7 +50,7 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
-    top: 40%;
+    top: 25%;
 }
 
 .choice-btn-container button {
@@ -69,7 +73,7 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
-    top: 50%;
+    top: 33%;
 }
 
 #left-hand {
@@ -89,7 +93,7 @@ body {
 }
 
 .animate {
-    animation: 0.25s shake 0.2s 3 forwards;
+    animation: 0.25s shake 0s 3 forwards;
 }
 
 .score-container {
