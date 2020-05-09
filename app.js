@@ -5,6 +5,7 @@ const scissorsSelectionBtn = document.getElementById('scissors-btn');
 const selectionBtnContainer = document.querySelector('.choice-btn-container');
 const selectionBtns = document.querySelectorAll('.choice-btn-container button');
 const restartBtnContainer = document.querySelector('.restart-btn-container');
+const restartBtn = document.getElementById('restart-btn');
 let rightHand = document.querySelector('#right-hand img'); //player
 let leftHand = document.querySelector('#left-hand img'); //computer
 const currentRoundText = document.querySelector('.score-container h1');
@@ -35,11 +36,6 @@ const getPlayerChoice = () => {
     playRound();
 }
 
-rockSelectionBtn.addEventListener('click', getPlayerChoice);
-paperSelectionBtn.addEventListener('click', getPlayerChoice);
-scissorsSelectionBtn.addEventListener('click', getPlayerChoice);
-
-
 const getComputerChoice = () => {
     const randomValue = Math.random();
     if (randomValue < 0.34) {
@@ -63,6 +59,16 @@ const nextRound = () => {
 const endGame = () => {
     selectionBtnContainer.style.display = 'none';
     restartBtnContainer.style.display = 'flex';
+}
+
+const restartGame = () => {
+    playerScore = 0;
+    computerScore = 0;
+    currentRound = 1;
+    resultText.innerText = '';
+    selectionBtnContainer.style.display = 'flex';
+    restartBtnContainer.style.display = 'none';
+    nextRound();
 }
 
 function waitForAnimation() {
@@ -127,3 +133,8 @@ const playRound = () => {
     console.log('Game is starting...');
     startShake();
 };
+
+rockSelectionBtn.addEventListener('click', getPlayerChoice);
+paperSelectionBtn.addEventListener('click', getPlayerChoice);
+scissorsSelectionBtn.addEventListener('click', getPlayerChoice);
+restartBtn.addEventListener('click', restartGame);
