@@ -2,7 +2,9 @@ const startGameBtn = document.getElementById('start-game-btn');
 const rockSelectionBtn = document.getElementById('rock-btn');
 const paperSelectionBtn = document.getElementById('paper-btn');
 const scissorsSelectionBtn = document.getElementById('scissors-btn');
-const selectionBtns = document.querySelectorAll('.choice-btn-container button')
+const selectionBtnContainer = document.querySelector('.choice-btn-container');
+const selectionBtns = document.querySelectorAll('.choice-btn-container button');
+const restartBtnContainer = document.querySelector('.restart-btn-container');
 let rightHand = document.querySelector('#right-hand img'); //player
 let leftHand = document.querySelector('#left-hand img'); //computer
 const currentRoundText = document.querySelector('.score-container h1');
@@ -58,6 +60,11 @@ const nextRound = () => {
     leftHand.classList.remove('animate');
 }
 
+const endGame = () => {
+    selectionBtnContainer.style.display = 'none';
+    restartBtnContainer.style.display = 'flex';
+}
+
 function waitForAnimation() {
     console.log('waiting for shake')
     const computerChoice = getComputerChoice();
@@ -84,6 +91,7 @@ function waitForAnimation() {
     gameIsRunning = false;
     scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`
     if (currentRound >= 3) {
+        endGame();
         computerScore === playerScore ? resultText.innerText = `Game Over - it's a draw.`:
         computerScore > playerScore ? resultText.innerText = `Game Over - Computer wins!` :
         resultText.innerText = `Game Over - You win!`;

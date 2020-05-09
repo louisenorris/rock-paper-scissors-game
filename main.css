@@ -55,6 +55,29 @@ body {
     outline: none;
 }
 
+.restart-btn-container {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    width: 100%;
+    top: 25%;
+}
+
+.restart-btn-container button {
+    background-color: white;
+    font-family: 'Amatic SC', cursive;
+    border: 2px solid #424242;
+    border-radius: 13%;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem;
+    width: 6rem;
+}
+
+.restart-btn-container button:focus {
+    outline: none;
+}
+
 .img-container {
     position: absolute;
     display: flex;
