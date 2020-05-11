@@ -65,7 +65,11 @@ const restartGame = () => {
     playerScore = 0;
     computerScore = 0;
     currentRound = 1;
+    rightHand.src = `assets/right_start.png`;
+    leftHand.src = `assets/left_start.png`;
     resultText.innerText = '';
+    currentRoundText.innerText = `Round ${currentRound}`;
+    scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`;
     selectionBtnContainer.style.display = 'flex';
     restartBtnContainer.style.display = 'none';
     nextRound();
