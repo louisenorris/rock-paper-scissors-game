@@ -87,7 +87,7 @@ body {
 }
 
 #left-hand {
-    height: 300px;
+    height: 150px;
 }
 
 #left-hand img {
@@ -95,7 +95,7 @@ body {
 }
 
 #right-hand {
-    height: 300px;
+    height: 150px;
 }
 
 #right-hand img {
@@ -133,5 +133,23 @@ body {
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media (min-width: 40rem) {
+    #right-hand {
+        height: 300px;
+    }
+    #left-hand {
+        height: 300px;
+    }
+}
+
+@media (min-width: 30rem) and (max-width: 40rem) {
+    #right-hand {
+        height: 200px;
+    }
+    #left-hand {
+        height: 200px;
     }
 }
