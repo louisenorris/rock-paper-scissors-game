@@ -29,6 +29,9 @@ body {
 }
 
 .container p {
+    /* max-width: 75%;
+    max-height: 300px;
+    flex-shrink: 4; */
     margin: 0.5rem;
 }
 

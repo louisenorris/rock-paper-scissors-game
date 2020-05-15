@@ -10,6 +10,7 @@ let rightHand = document.querySelector('#right-hand img'); //player
 let leftHand = document.querySelector('#left-hand img'); //computer
 const currentRoundText = document.querySelector('.score-container h1');
 const scoreText = document.querySelector('.score-container h2:first-of-type');
+const roundMessage = document.querySelector('.score-container .round-message');
 const resultText = document.querySelector('.score-container h2:last-of-type');
 
 const RESULT_DRAW = 'DRAW';
@@ -70,6 +71,7 @@ const restartGame = () => {
     resultText.innerText = '';
     currentRoundText.innerText = `Round ${currentRound}`;
     scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`;
+    roundMessage.innerText = '';
     selectionBtnContainer.style.display = 'flex';
     restartBtnContainer.style.display = 'none';
     nextRound();
@@ -99,7 +101,8 @@ function waitForAnimation() {
     }
     console.log(message, 'round ' + currentRound);
     gameIsRunning = false;
-    scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`
+    scoreText.innerText = `Score: computer ${computerScore} -- player ${playerScore}`;
+    roundMessage.innerText = message;
     if (currentRound >= 3) {
         endGame();
         computerScore === playerScore ? resultText.innerText = `Game Over - it's a draw.`:
